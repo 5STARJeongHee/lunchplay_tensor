@@ -32,9 +32,11 @@ https://jins-sw.tistory.com/1
   docker-ce는 다음과 같은 과정으로 설치합니다.(우분투 기준) 
   
   // 기존 오래된 도커 관련 패키지 삭제
+  
   1) sudo apt-get remove docker docker-engine docker.io containerd runc  
   
   // docker 설치를 위해 필요한 패키지들 설치
+  
   2) sudo apt-get update
 
      sudo apt-get install \
@@ -43,26 +45,33 @@ https://jins-sw.tistory.com/1
        curl \
        gnupg-agent \
        software-properties-common
+  
   // Docker 공식 GPG 키 추가
+  
   3) curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
   
   //stable 버전으로 설치하도록 설정
+  
   4) sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
    $(lsb_release -cs) \
    stable"
   
   //도커 설치
+  
   5) sudo apt-get update
      sudo apt-get install docker-ce docker-ce-cli containerd.io
 
   // Docker에서 GPU 컨테이너를 돌릴 수 있도록 NVIDIA Container Toolkit 설치
+  
   6) distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
    && curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add - \
    && curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee       /etc/apt/sources.list.d/nvidia-docker.list
    
    sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
+   
    sudo systemctl restart docker
+   
    //공식문서는 조금 바뀌었는지 nvidia-container-toolkit이라 안써있고 sudo apt-get install -y nvidia-docker2 로 써져있다. 
    
   7) test
@@ -71,26 +80,43 @@ https://jins-sw.tistory.com/1
   docker run --gpus all -it --rm -p 8888:8888 tensorflow/tensorflow:latest-gpu-py3-jupyter
    
   8) Dockerfile , requirements.txt 파일 작성
+  
   컨테이너 내부를 살펴보고 필요한 라이브러리들을 더 설치한 이미지를 사용하기로 결정하여 requirements.txt에 필요한 라이브러리들을
+  
   써두고 Dockerfile로 빌드하여 새 이미지를 만들었다. 
   
 ## Dockerfile 내부
+
 ### 베이스 이미지
+
 FROM tensorflow/tensorflow:latest-gpu-py3-jupyter
+
 MAINTAINER LunchPlay
+
 ### 필요한 종속성 파일을 기술한 파일을 컨테이너 작업 디렉토리에 옮김
+
 ADD requirements.txt . 
+
 RUN pip install --upgrade pip
+
 ### 빅데이터 관련 많은 기능을 가진 Kaggler 라이브러리 다운
+
 RUN pip install Kaggler
+
 ### 컨테이너 자체와 Kaggler 라이브러리 설치로 인해 종속적으로 설치되지 않고 추가로 더 필요한 라이브러리 설치
+
 RUN pip install -r requirements.txt
+
 ### 주피터 노트북 사용시 생성되는 파일을 실제 로컬에서 받기 위해 마운팅용 폴더
+
 RUN mkdir /tf/LunchPlay
+
 ### 권한 문제 방지를 위해 미리 권한 설정해둠.
+
 RUN chmod 777 /tf/LunchPlay
 
 9) docker build로 이미지 생성
+
 Dockerfile이 위치한 경로에서 
 
 sudo docker build -t [이미지이름]:[태그] .
@@ -102,6 +128,7 @@ sudo docker build -t [이미지이름]:[태그] .
 sudo docker login 
 
 #위의 명령어로 docker hub에 로그인(미리 docker hub에 대한 가입을 마치고 오자)
+
 #아래 명령어에서 태그를 달지 않으면 latest로 자동 태그가 기입됨
 
 sudo docker tag [생성한 이미지이름]:[태그] [도커 허브 사용자 계정]/[이미지 이름]:[태그]
