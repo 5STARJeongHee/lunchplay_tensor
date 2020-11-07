@@ -59,7 +59,7 @@ https://jins-sw.tistory.com/1
   // Docker에서 GPU 컨테이너를 돌릴 수 있도록 NVIDIA Container Toolkit 설치
   6) distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
    && curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add - \
-   && curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+   && curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee       /etc/apt/sources.list.d/nvidia-docker.list
    
    sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
    sudo systemctl restart docker
@@ -74,20 +74,20 @@ https://jins-sw.tistory.com/1
   컨테이너 내부를 살펴보고 필요한 라이브러리들을 더 설치한 이미지를 사용하기로 결정하여 requirements.txt에 필요한 라이브러리들을
   써두고 Dockerfile로 빌드하여 새 이미지를 만들었다. 
   
-  ## Dockerfile 내부
-# #베이스 이미지
+## Dockerfile 내부
+### 베이스 이미지
 FROM tensorflow/tensorflow:latest-gpu-py3-jupyter
 MAINTAINER LunchPlay
-# #필요한 종속성 파일을 기술한 파일을 컨테이너 작업 디렉토리에 옮김
+### 필요한 종속성 파일을 기술한 파일을 컨테이너 작업 디렉토리에 옮김
 ADD requirements.txt . 
 RUN pip install --upgrade pip
-# #빅데이터 관련 많은 기능을 가진 Kaggler 라이브러리 다운
+### 빅데이터 관련 많은 기능을 가진 Kaggler 라이브러리 다운
 RUN pip install Kaggler
-# #컨테이너 자체와 Kaggler 라이브러리 설치로 인해 종속적으로 설치되지 않고 추가로 더 필요한 라이브러리 설치
+### 컨테이너 자체와 Kaggler 라이브러리 설치로 인해 종속적으로 설치되지 않고 추가로 더 필요한 라이브러리 설치
 RUN pip install -r requirements.txt
-# #주피터 노트북 사용시 생성되는 파일을 실제 로컬에서 받기 위해 마운팅용 폴더
+### 주피터 노트북 사용시 생성되는 파일을 실제 로컬에서 받기 위해 마운팅용 폴더
 RUN mkdir /tf/LunchPlay
-# #권한 문제 방지를 위해 미리 권한 설정해둠.
+### 권한 문제 방지를 위해 미리 권한 설정해둠.
 RUN chmod 777 /tf/LunchPlay
 
 9) docker build로 이미지 생성
