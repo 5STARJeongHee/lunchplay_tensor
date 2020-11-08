@@ -72,7 +72,9 @@ https://jins-sw.tistory.com/1
    
    sudo systemctl restart docker
    
-   //공식문서는 조금 바뀌었는지 nvidia-container-toolkit이라 안써있고 sudo apt-get install -y nvidia-docker2 로 써져있다. 
+   //ndivia공식문서는 조금 바뀌었는지 nvidia-container-toolkit이라 안써있고 sudo apt-get install -y nvidia-docker2 로 써져있다.
+   //tensorflow 공식 사이트에서는 docker 19.03 버전 이전에는 nvidia-docker2가 설치되어 있어야하고 19.03 이상 부터는 
+   //nvidia-container-toolkit을 설치하라고 되어 있다. docker --version으로 버전 확인 후 잘 선택해서 설치하자
    
   7) test
   docker run --gpus all nvidia/cuda:10.0-base nvidia-smi
