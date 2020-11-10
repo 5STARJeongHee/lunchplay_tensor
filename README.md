@@ -1,5 +1,7 @@
 # lunchplay_tensor
 
+# UBUNTU 기준 
+
 tensorflow가 구축된 도커 이미지를 사용하려면
 다음 2개가 설치되어 있어야 합니다.
 
@@ -13,7 +15,7 @@ tensorflow가 구축된 도커 이미지를 사용하려면
 
 https://jins-sw.tistory.com/1
 
-
+--------------------------------------------------------------------------------------------
 1. sudo ubuntu-drivers autoinstall
 
 로 간단하게 드라이버를 설치할 수 있습니다. 설치 완료 후 재부팅해야 적용되므로 재부팅 해주시고
@@ -26,8 +28,6 @@ https://jins-sw.tistory.com/1
 로 데비안에서 제공하는 docker.io를 설치하는 방법과
 
 2-2. 도커에서 직접 제공하는 docker-ce를 설치하는 방법이 있습니다.(https://docs.docker.com/engine/install/ubuntu/)
-
-(windows 기준은 installer 그대로 쭉 실행하시면되서 간단합니다.)
 
   docker-ce는 다음과 같은 과정으로 설치합니다.(우분투 기준) 
   
