@@ -12,7 +12,15 @@ RUN pip install -r requirements.txt
 
 #RUN python -c 'import nltk;nltk.download()'
 
-RUN sudo apt-get install -y openjdk-8-jre
+RUN apt-get install -y --no-install-recommends software-properties-common
+
+RUN add-apt-repository -y ppa:openjdk-r/ppa
+
+RUN apt-get update
+
+RUN apt-get install -y openjdk-8-jdk
+
+RUN apt-get install -y openjdk-8-jre
 
 RUN mkdir /tf/LunchPlay
 

@@ -1,5 +1,0 @@
-Kaggler
-pandas
-nltk
-gensim
-konlpy
