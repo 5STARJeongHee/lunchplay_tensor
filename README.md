@@ -102,11 +102,28 @@ MAINTAINER LunchPlay
 
 ADD requirements.txt . 
 
+### pip가 최신 버전이 아니라서 업데이트 해준다.
+
 RUN pip install --upgrade pip
+
+### java 와 python을 연결해주는 jpype 패키지 설치
+
+RUN pip install jpype1
 
 ### 파이썬 라이브러리 설치
 
 RUN pip install -r requirements.txt
+
+### openjdk 를 설치하기 위해 저장소를 업데이트 하고 java환경 구축
+RUN apt-get install -y --no-install-recommends software-properties-common
+
+RUN add-apt-repository -y ppa:openjdk-r/ppa
+
+RUN apt-get update
+
+RUN apt-get install -y openjdk-8-jdk
+
+RUN apt-get install -y openjdk-8-jre
 
 ### 주피터 노트북 사용시 생성되는 파일을 실제 로컬에서 받기 위해 마운팅용 폴더
 
@@ -116,7 +133,9 @@ RUN mkdir /tf/LunchPlay
 
 RUN chmod 777 /tf/LunchPlay
 
-9) docker build로 이미지 생성
+--------------------------------------------------------------------------------------------------------
+
+### docker build로 이미지 생성
 
 Dockerfile이 위치한 경로에서 
 
@@ -124,7 +143,7 @@ sudo docker build -t [이미지이름]:[태그] .
 
 위의 명령어를 통해서 도커 이미지가 생성된다. 
 
-10) 도커 이미지 도커 허브에 올리기
+### 도커 이미지 도커 허브에 올리기
 
 sudo docker login 
 
@@ -144,3 +163,7 @@ sudo docker push [사용자 계정]/[이미지 이름]:[태그]
   docker run --gpus all -it --rm -p [로컬 포트]:8888 -v [마운팅할 로컬 경로]:/tf/LunchPlay qhxmaoflr/lunchplay_tensor
   
   ## 주피터 실행 전에 비번 설정하도록 변경, 커맨드 창에 사용할 비번을 입력하고 웹 브라우저에 127.0.0.1:[포트] 입력하시면 됩니다.
+  
+  ### nlp 버전
+  docker run --gpus all -it --rm -p [로컬 포트]:8888 -v [마운팅할 로컬 경로]:/tf/LunchPlay qhxmaoflr/lunchplay_tensor:nlp
+  
