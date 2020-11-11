@@ -102,11 +102,11 @@ MAINTAINER LunchPlay
 
 ADD requirements.txt . 
 
-### 
+### pip가 최신 버전이 아니라서 업데이트 해준다.
 
 RUN pip install --upgrade pip
 
-###
+### java 와 python을 연결해주는 jpype 패키지 설치
 
 RUN pip install jpype1
 
@@ -114,7 +114,7 @@ RUN pip install jpype1
 
 RUN pip install -r requirements.txt
 
-### 
+### openjdk 를 설치하기 위해 저장소를 업데이트 하고 java환경 구축
 RUN apt-get install -y --no-install-recommends software-properties-common
 
 RUN add-apt-repository -y ppa:openjdk-r/ppa
@@ -164,4 +164,5 @@ sudo docker push [사용자 계정]/[이미지 이름]:[태그]
   
   ## 주피터 실행 전에 비번 설정하도록 변경, 커맨드 창에 사용할 비번을 입력하고 웹 브라우저에 127.0.0.1:[포트] 입력하시면 됩니다.
   
-  nlp 
+  ### nlp 버전
+  docker run --gpus all -it --rm -p [로컬 포트]:8888 -v [마운팅할 로컬 경로]:/tf/LunchPlay qhxmaoflr/lunchplay_tensor:nlp
