@@ -6,15 +6,19 @@ ADD requirements.txt .
 
 RUN pip install --upgrade pip
 
+RUN pip install jpype1
+
 RUN pip install -r requirements.txt
 
 RUN python -c "import nltk;nltk.download('all')"
 
+RUN sudo apt-get install -y openjdk-8-jre
+
+RUN java -version
+
 RUN mkdir /tf/LunchPlay
 
 RUN chmod 777 /tf/LunchPlay
-
-RUN jupyter notebook --generate-config --allow-root
 
 ADD passwd_jupyter.sh .
 

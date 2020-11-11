@@ -1,2 +1,4 @@
 Kaggler
 pandas
+gensim
+konlpy

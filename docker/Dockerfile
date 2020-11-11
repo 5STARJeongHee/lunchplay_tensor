@@ -6,9 +6,13 @@ ADD requirements.txt .
 
 RUN pip install --upgrade pip
 
+RUN pip install jpype1
+
 RUN pip install -r requirements.txt
 
 #RUN python -c 'import nltk;nltk.download()'
+
+RUN sudo apt-get install -y openjdk-8-jre
 
 RUN mkdir /tf/LunchPlay
 
