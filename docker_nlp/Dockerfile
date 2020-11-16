@@ -18,7 +18,7 @@ RUN add-apt-repository -y ppa:openjdk-r/ppa
 
 RUN apt-get update
 
-RUN apt-get install -y openjdk-8-jdk
+RUN apt-get install -y openjdk-8-jdk git
 
 RUN apt-get install -y openjdk-8-jre
 
