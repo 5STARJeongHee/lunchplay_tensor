@@ -6,11 +6,11 @@ ADD requirements.txt .
 
 RUN pip install --upgrade pip
 
+RUN apt-get install -y git
+
 RUN pip install jpype1
 
 RUN pip install -r requirements.txt
-
-#RUN python -c 'import nltk;nltk.download()'
 
 RUN apt-get install -y --no-install-recommends software-properties-common
 

@@ -2,3 +2,4 @@ Kaggler
 pandas
 gensim
 konlpy
+torch
