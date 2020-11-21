@@ -6,6 +6,8 @@ ADD requirements.txt .
 
 RUN pip install --upgrade pip
 
+RUN apt-get install -y git
+
 RUN pip install jpype1
 
 RUN pip install -r requirements.txt

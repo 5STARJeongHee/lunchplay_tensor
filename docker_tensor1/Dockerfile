@@ -1,18 +1,24 @@
-FROM tensorflow/tensorflow:latest-gpu-py3-jupyter
+FROM tensorflow/tensorflow:1.15.4-gpu-py3-jupyter
 
 MAINTAINER LunchPlay
 
 ADD requirements.txt .
 
-RUN pip install --upgrade pip
-
 RUN apt-get install -y git
+
+RUN pip install --upgrade pip
 
 RUN pip install jpype1
 
 RUN pip install -r requirements.txt
 
 RUN python -c "import nltk;nltk.download('all')"
+
+RUN pip uninstall -y tensorflow tensorboard tensorflow-estimator tensorflow-gpu 
+
+RUN pip install tensorflow-gpu==1.15.4
+
+WORKDIR /tf
 
 RUN apt-get install -y --no-install-recommends software-properties-common
 

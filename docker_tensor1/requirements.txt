@@ -1,5 +1,6 @@
-Kaggler
 pandas
+nltk
 gensim
 konlpy
+optuna
 torch
