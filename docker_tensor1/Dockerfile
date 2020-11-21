@@ -14,10 +14,6 @@ RUN pip install -r requirements.txt
 
 RUN python -c "import nltk;nltk.download('all')"
 
-RUN pip uninstall -y tensorflow tensorboard tensorflow-estimator tensorflow-gpu 
-
-RUN pip install tensorflow-gpu==1.15.4 keras==2.3.1
-
 WORKDIR /tf
 
 RUN apt-get install -y --no-install-recommends software-properties-common
