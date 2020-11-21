@@ -12,8 +12,6 @@ RUN pip install jpype1
 
 RUN pip install -r requirements.txt
 
-#RUN python -c 'import nltk;nltk.download()'
-
 RUN apt-get install -y --no-install-recommends software-properties-common
 
 RUN add-apt-repository -y ppa:openjdk-r/ppa
@@ -35,3 +33,4 @@ ADD passwd_jupyter.sh .
 EXPOSE 8888
 
 CMD ["/bin/bash","passwd_jupyter.sh"]
+

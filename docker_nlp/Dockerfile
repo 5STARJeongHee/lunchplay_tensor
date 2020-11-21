@@ -35,3 +35,4 @@ ADD passwd_jupyter.sh .
 EXPOSE 8888
 
 CMD ["/bin/bash","passwd_jupyter.sh"]
+
