@@ -6,7 +6,11 @@ ADD requirements.txt .
 
 RUN apt-get update
 
-RUN apt-get install -y git
+RUN apt-get install -y git cmake build-essential libboost-dev libboost-system-dev libboost-filesystem-dev wget
+
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.19.1/cmake-3.19.1-Linux-x86_64.sh && chmod 777 cmake-3.19.1-Linux-x86_64.sh
+
+RUN ./cmake-3.19.1-Linux-x86_64.sh --skip-license
 
 RUN pip install --upgrade pip
 

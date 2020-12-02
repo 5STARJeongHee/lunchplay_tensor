@@ -8,11 +8,25 @@ RUN apt-get update
 
 RUN pip install --upgrade pip
 
-RUN apt-get install -y git
+RUN apt-get install -y git cmake build-essential libboost-dev libboost-system-dev libboost-filesystem-dev wget
+
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.19.1/cmake-3.19.1-Linux-x86_64.sh && chmod 777 cmake-3.19.1-Linux-x86_64.sh
+
+RUN ./cmake-3.19.1-Linux-x86_64.sh --skip-license
 
 RUN pip install jpype1
 
 RUN pip install -r requirements.txt
+
+RUN pip uninstall lightgbm -y
+
+RUN git clone --recursive https://github.com/microsoft/LightGBM
+
+WORKDIR /tf/LightGBM/python-package
+
+RUN python setup.py install --gpu 
+
+WORKDIR /tf
 
 RUN apt-get install -y --no-install-recommends software-properties-common
 
