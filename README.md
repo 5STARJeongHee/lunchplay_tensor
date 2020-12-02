@@ -167,3 +167,6 @@ sudo docker push [사용자 계정]/[이미지 이름]:[태그]
   ### nlp 버전 - nltk를 모두 설치해놓아서 따로 이미지를 만들어 두었습니다. 그외에 모든 패키지는 동일, 설치된 패키지 목록에는 이 버전 기준으로 써놓았음.
   docker run --gpus all -it --rm -p [로컬 포트]:8888 -v [마운팅할 로컬 경로]:/tf/LunchPlay qhxmaoflr/lunchplay_tensor:nlp
   
+  ## tensorflow1 버전
+  docker run --gpus all -it --rm -p [로컬 포트]:8888 -v [마운팅할 로컬 경로]:/tf/LunchPlay qhxmaoflr/lunchplay_tensor:1.15-gpu_nlp
+  
