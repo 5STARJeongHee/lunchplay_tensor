@@ -4,6 +4,8 @@ MAINTAINER LunchPlay
 
 ADD requirements.txt .
 
+RUN apt-get update
+
 RUN apt-get install -y git
 
 RUN pip install --upgrade pip
