@@ -34,7 +34,7 @@ RUN mkdir /tf/LunchPlay
 
 RUN chmod 777 /tf/LunchPlay
 
-RUN jupyter notebook --generate-config --allow-root
+RUN jupyter notebook --generate-config 
 
 ADD passwd_jupyter.sh .
 

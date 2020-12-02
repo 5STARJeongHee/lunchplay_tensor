@@ -40,6 +40,8 @@ RUN chmod 777 /tf/LunchPlay
 
 ADD passwd_jupyter.sh .
 
+RUN jupyter notebook --generate-config
+
 EXPOSE 8888
 
 CMD ["/bin/bash","passwd_jupyter.sh"]
