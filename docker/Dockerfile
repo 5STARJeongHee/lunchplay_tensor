@@ -18,14 +18,6 @@ RUN pip install jpype1
 
 RUN pip install -r requirements.txt
 
-RUN pip uninstall lightgbm -y
-
-RUN git clone --recursive https://github.com/microsoft/LightGBM
-
-WORKDIR /tf/LightGBM/python-package
-
-RUN python setup.py install --gpu 
-
 WORKDIR /tf
 
 RUN apt-get install -y --no-install-recommends software-properties-common
