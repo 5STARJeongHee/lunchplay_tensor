@@ -18,6 +18,8 @@ RUN pip install jpype1
 
 RUN pip install -r requirements.txt
 
+RUN pip install notebook --upgrade
+
 RUN python -c "import nltk;nltk.download('all')"
 
 RUN apt-get install -y --no-install-recommends software-properties-common
